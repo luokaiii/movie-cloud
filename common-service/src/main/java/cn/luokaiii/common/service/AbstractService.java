@@ -1,6 +1,6 @@
-package cn.luokaiii.user.service;
+package cn.luokaiii.common.service;
 
-import cn.luokaiii.user.model.BaseEntity;
+import cn.luokaiii.common.model.BaseEntity;
 import com.google.common.collect.Lists;
 import org.springframework.data.domain.Example;
 import org.springframework.data.domain.Page;

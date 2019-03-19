@@ -1,4 +1,4 @@
-package cn.luokaiii.user.utils;
+package cn.luokaiii.common.utils;
 
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.BeanWrapper;

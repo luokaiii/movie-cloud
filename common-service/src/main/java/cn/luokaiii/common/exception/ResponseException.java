@@ -1,4 +1,4 @@
-package cn.luokaiii.user.exception;
+package cn.luokaiii.common.exception;
 
 import org.springframework.http.HttpStatus;
 

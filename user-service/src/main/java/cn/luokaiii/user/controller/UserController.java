@@ -2,8 +2,8 @@ package cn.luokaiii.user.controller;
 
 import cn.luokaiii.user.model.User;
 import cn.luokaiii.user.service.UserService;
-import cn.luokaiii.user.utils.CopyUtils;
-import cn.luokaiii.user.exception.ResponseException;
+import cn.luokaiii.common.utils.CopyUtils;
+import cn.luokaiii.common.exception.ResponseException;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Example;

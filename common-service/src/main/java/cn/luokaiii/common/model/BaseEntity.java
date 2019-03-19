@@ -1,11 +1,10 @@
-package cn.luokaiii.user.model;
+package cn.luokaiii.common.model;
 
-import org.springframework.data.annotation.Id;
 
 import java.time.LocalDateTime;
 
 public class BaseEntity {
-    @Id
+
     private String id;
 
     private LocalDateTime createTime;
