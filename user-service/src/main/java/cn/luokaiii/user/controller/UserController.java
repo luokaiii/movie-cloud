@@ -1,15 +1,16 @@
 package cn.luokaiii.user.controller;
 
+import cn.luokaiii.common.exception.ResponseException;
+import cn.luokaiii.common.utils.CopyUtils;
 import cn.luokaiii.user.model.User;
 import cn.luokaiii.user.service.UserService;
-import cn.luokaiii.common.utils.CopyUtils;
-import cn.luokaiii.common.exception.ResponseException;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Example;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -18,9 +19,13 @@ public class UserController {
 
     private final UserService userService;
 
+    private final PasswordEncoder passwordEncoder;
+
     @Autowired
-    public UserController(UserService userService) {
+    public UserController(UserService userService,
+                          PasswordEncoder passwordEncoder) {
         this.userService = userService;
+        this.passwordEncoder = passwordEncoder;
     }
 
     @GetMapping
@@ -37,8 +42,15 @@ public class UserController {
     }
 
     @PostMapping
-    @ApiOperation(value = "创建/注册用户", tags = {"管理员权限接口", "用户接口"})
+    @ApiOperation(value = "创建用户", tags = "管理员权限接口")
     public ResponseEntity create(@RequestBody User user) {
+        return ResponseEntity.ok(userService.save(user));
+    }
+
+    @PostMapping("/register")
+    @ApiOperation(value = "注册用户", tags = "用户接口")
+    public ResponseEntity register(@RequestBody User user) {
+        user.setPassword(passwordEncoder.encode(user.getPassword()));
         return ResponseEntity.ok(userService.save(user));
     }
 
