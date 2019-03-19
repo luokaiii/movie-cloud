@@ -13,6 +13,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
+import java.security.Principal;
+
 @RestController
 @RequestMapping("/user")
 public class UserController {
@@ -26,6 +28,11 @@ public class UserController {
                           PasswordEncoder passwordEncoder) {
         this.userService = userService;
         this.passwordEncoder = passwordEncoder;
+    }
+
+    @GetMapping("/ping")
+    public ResponseEntity ping(Principal user) {
+        return ResponseEntity.ok(user);
     }
 
     @GetMapping

@@ -13,6 +13,9 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
+/**
+ * SpringSecurity 安全配置，该配置会在ResourceServer之前执行
+ */
 @Configuration
 @EnableWebSecurity
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
@@ -50,7 +53,16 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .passwordEncoder(passwordEncoder());
     }
 
+    /**
+     * 将 AuthenticationManager 暴露出去
+     */
+    @Bean
     @Override
+    protected AuthenticationManager authenticationManager() throws Exception {
+        return super.authenticationManager();
+    }
+
+    //    @Override
     public AuthenticationManager authenticationManagerBean() throws Exception {
         return super.authenticationManagerBean();
     }
@@ -62,4 +74,5 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     public static PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
+
 }
