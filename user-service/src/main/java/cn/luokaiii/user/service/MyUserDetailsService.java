@@ -1,17 +1,18 @@
 package cn.luokaiii.user.service;
 
 import cn.luokaiii.common.exception.ResponseException;
+import cn.luokaiii.common.utils.CopyUtils;
 import cn.luokaiii.user.dao.UserDao;
+import cn.luokaiii.user.model.MyUserDetails;
 import cn.luokaiii.user.model.User;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
-import java.util.Collections;
-
+@Slf4j
 @Service
 public class MyUserDetailsService implements UserDetailsService {
 
@@ -25,9 +26,14 @@ public class MyUserDetailsService implements UserDetailsService {
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         User user = userDao.findByUsername(username)
-                .orElseThrow(() -> new ResponseException(String.format("User not found:%s", username)));
+                .orElseThrow(() -> new ResponseException(String.format("用户没有找到 : %s", username)));
 
-        return new org.springframework.security.core.userdetails.User(username, user.getPassword(), Collections.singleton(new SimpleGrantedAuthority("USER")));
+        MyUserDetails userDetails = new MyUserDetails(username);
+
+        CopyUtils.copyPropertiesIgnoreNull(user, userDetails);
+        log.info("用户 {} 登录成功", username);
+
+        return userDetails;
     }
 
 }
