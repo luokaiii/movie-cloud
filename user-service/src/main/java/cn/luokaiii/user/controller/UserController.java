@@ -10,7 +10,6 @@ import org.springframework.data.domain.Example;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.core.Authentication;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
@@ -29,12 +28,8 @@ public class UserController {
         this.passwordEncoder = passwordEncoder;
     }
 
-    @GetMapping
-    public Authentication ping(Authentication user) {
-        return user;
-    }
 
-    @GetMapping("/all")
+    @GetMapping
     @ApiOperation(value = "查询用户列表", tags = "管理员权限接口")
     public ResponseEntity getAll(User user, @PageableDefault Pageable pageable) {
         Example<User> example = Example.of(user);

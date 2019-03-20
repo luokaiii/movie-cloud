@@ -12,6 +12,7 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
 import javax.servlet.http.HttpSession;
 
+// todo Zuul+Swagger 聚合分布式接口文档
 @Configuration
 @EnableSwagger2
 public class SwaggerConfig {

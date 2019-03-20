@@ -4,10 +4,12 @@ import cn.luokaiii.common.model.BaseEntity;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.util.Collections;
 import java.util.List;
 
+@Document(collection = "user")
 @Data
 @EqualsAndHashCode(callSuper = true)
 public class User extends BaseEntity {
