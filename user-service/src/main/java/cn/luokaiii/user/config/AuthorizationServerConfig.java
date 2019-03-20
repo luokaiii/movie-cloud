@@ -47,11 +47,19 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
         log.info("AuthorizationServerSecurityConfigurer is complete!");
     }
 
+    /**
+     * 配置加载服务
+     * 在授权方式中，一般会使用两种授权方式：password 和 client_credentials
+     * password 模式，使用认证服务器中的用户，在登录时带上 用户账号和客户端账号，请求到的 TokenAccess 中包含认证服务器的用户信息，而不是客户端自己的 authorization
+     * http://localhost:9000/oauth/token?username=user&password=1234&grant_type=password&client_id=movie&client_secret=123456&scope=all
+     * client_credentials 客户端模式，没有用户的概念，直接使用客户端账号请求 TokenAccess，这时可以使用自己的用户信息，来实现自定义的 authorization
+     * authorization_code 授权码模式，使用的是回调地址，一般的第三方登录会使用这种方式，较为复杂
+     */
     @Override
     public void configure(ClientDetailsServiceConfigurer clients) throws Exception {
-        log.info("实例初始密码为:" + passwordEncoder.encode("clientSecret"));
         clients.inMemory()
                 .withClient("movie-service")
+                // todo 这里的 secret 有时需要加密，有时不需要
                 .secret(passwordEncoder.encode("movie-service"))
                 .authorizedGrantTypes("authorization_code", "refresh_token", "password")
                 .scopes("all");
