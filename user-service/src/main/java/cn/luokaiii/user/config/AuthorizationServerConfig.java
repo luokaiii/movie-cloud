@@ -52,7 +52,7 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
         log.info("实例初始密码为:" + passwordEncoder.encode("clientSecret"));
         clients.inMemory()
                 .withClient("movie-service")
-                .secret("movie-service")
+                .secret(passwordEncoder.encode("movie-service"))
                 .authorizedGrantTypes("authorization_code", "refresh_token", "password")
                 .scopes("all");
     }
