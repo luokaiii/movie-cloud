@@ -58,5 +58,15 @@
             <version>2.3.3.RELEASE</version>
         </dependency>
 
+        <!-- Redis Data-->
+        <dependency>
+            <groupId>org.springframework.data</groupId>
+            <artifactId>spring-data-redis</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>redis.clients</groupId>
+            <artifactId>jedis</artifactId>
+        </dependency>
+
     </dependencies>
 </project>
