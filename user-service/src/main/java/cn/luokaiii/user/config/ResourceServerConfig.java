@@ -6,6 +6,9 @@ import org.springframework.security.oauth2.config.annotation.web.configuration.E
 import org.springframework.security.oauth2.config.annotation.web.configuration.ResourceServerConfigurerAdapter;
 import org.springframework.security.oauth2.config.annotation.web.configurers.ResourceServerSecurityConfigurer;
 
+/**
+ * 认证服务器的资源保护
+ */
 @Configuration
 @EnableResourceServer
 public class ResourceServerConfig extends ResourceServerConfigurerAdapter {
@@ -17,12 +20,18 @@ public class ResourceServerConfig extends ResourceServerConfigurerAdapter {
 
     @Override
     public void configure(HttpSecurity http) throws Exception {
+//        http
+//                .csrf().disable()
+//                .requestMatchers().anyRequest()
+//                .and()
+//                .authorizeRequests()
+//                .antMatchers("/oauth/*").permitAll()
+//                .anyRequest().authenticated();
         http
-                .csrf().disable()
-                .requestMatchers().anyRequest()
+                .requestMatchers().antMatchers("/user/**")
                 .and()
                 .authorizeRequests()
-                .antMatchers("/oauth/*").permitAll()
-                .anyRequest().authenticated();
+                .anyRequest()
+                .authenticated();
     }
 }

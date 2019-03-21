@@ -43,34 +43,55 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
         this.redisConnectionFactory = redisConnectionFactory;
     }
 
+    /**
+     * 配置授权服务器的安全
+     *
+     * @param security AuthorizationServerSecurityConfigurer
+     */
     @Override
-    public void configure(AuthorizationServerSecurityConfigurer security) {
-        security
-                .allowFormAuthenticationForClients() // 允许对客户端进行表单身份验证
-                .checkTokenAccess("isAuthenticated")
-                .tokenKeyAccess("permitAll()");
+    public void configure(AuthorizationServerSecurityConfigurer security) throws Exception {
+        super.configure(security);
+//        security
+//                .allowFormAuthenticationForClients() // 允许对客户端进行表单身份验证
+//                .checkTokenAccess("isAuthenticated")
+//                .tokenKeyAccess("permitAll()");
         log.info("AuthorizationServerSecurityConfigurer is complete!");
     }
 
     /**
-     * 配置加载服务
+     * 配置 ClientDetailsService，至少需要配置一个 Client，否则服务器将不会启动
      * 在授权方式中，一般会使用两种授权方式：password 和 client_credentials
-     *  - password 模式，使用认证服务器中的用户，在登录时带上 用户账号和客户端账号，请求到的 TokenAccess 中包含认证服务器的用户信息，而不是客户端自己的 authorization
-     *      http://localhost:9000/oauth/token?username=user&password=1234&grant_type=password&client_id=movie&client_secret=123456&scope=all
-     *  - client_credentials 客户端模式，没有用户的概念，直接使用客户端账号请求 TokenAccess，这时可以使用自己的用户信息，来实现自定义的 authorization
-     *  - authorization_code 授权码模式，使用的是回调地址，一般的第三方登录会使用这种方式，较为复杂
+     * - password 模式，使用认证服务器中的用户，在登录时带上 用户账号和客户端账号，请求到的 TokenAccess 中包含认证服务器的用户信息，而不是客户端自己的 authorization
+     * http://localhost:9000/oauth/token?username=user&password=1234&grant_type=password&client_id=movie&client_secret=123456&scope=all
+     * - client_credentials 客户端模式，没有用户的概念，直接使用客户端账号请求 TokenAccess，这时可以使用自己的用户信息，来实现自定义的 authorization
+     * - authorization_code 授权码模式，使用的是回调地址，一般的第三方登录会使用这种方式，较为复杂
      */
     @Override
     public void configure(ClientDetailsServiceConfigurer clients) throws Exception {
         clients.inMemory()
                 .withClient("movie-service")
-                // todo 这里的 secret 有时需要加密，有时不需要
 //                .secret("movie-service")
                 .secret(passwordEncoder.encode("movie-service"))
                 .authorizedGrantTypes("authorization_code", "refresh_token", "password")
-                .scopes("all");
+                .redirectUris("http://localhost:9001")
+                .autoApprove("all")
+                .scopes("all")
+                .and()
+                .withClient("comment-service")
+                .secret("comment-service")
+                .authorizedGrantTypes("authorization_code", "refresh_token")
+                .redirectUris("http://localhost:9003/login/oauth2/code/callback")
+                .scopes("read", "write", "all")
+                .autoApprove("all");
     }
 
+    /**
+     * 配置 Authorization Server EndPoints 的一些非安全特性
+     * 比如 token 存储、token自定义、授权类型等
+     * 默认情况下，不需要做任何事情，但是如果需要使用密码授权模式，则需要提供一个 AuthenticationManager
+     *
+     * @param endpoints Authorization Server EndPoints
+     */
     @Override
     public void configure(AuthorizationServerEndpointsConfigurer endpoints) {
         endpoints.tokenStore(tokenStore())
