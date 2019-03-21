@@ -69,20 +69,28 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
     @Override
     public void configure(ClientDetailsServiceConfigurer clients) throws Exception {
         clients.inMemory()
+                // Movie-Service
                 .withClient("movie-service")
-//                .secret("movie-service")
                 .secret(passwordEncoder.encode("movie-service"))
                 .authorizedGrantTypes("authorization_code", "refresh_token", "password")
-                .redirectUris("http://localhost:9001")
+                .redirectUris("http://localhost:9001/login/oauth2/code/callback")
                 .autoApprove("all")
                 .scopes("all")
                 .and()
+                // Comment-Service
                 .withClient("comment-service")
-                .secret("comment-service")
+                .secret(passwordEncoder.encode("comment-service"))
                 .authorizedGrantTypes("authorization_code", "refresh_token")
                 .redirectUris("http://localhost:9003/login/oauth2/code/callback")
                 .scopes("read", "write", "all")
-                .autoApprove("all");
+                .autoApprove("all")
+                .and()
+                // User-Service
+                .withClient("user-service")
+                .secret(passwordEncoder.encode("user-service"))
+                .authorizedGrantTypes("authorization_code", "refresh_token")
+                .scopes("all")
+        ;
     }
 
     /**
@@ -94,9 +102,9 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
      */
     @Override
     public void configure(AuthorizationServerEndpointsConfigurer endpoints) {
-        endpoints.tokenStore(tokenStore())
-                .userDetailsService(userDetailsService)
-                .authenticationManager(authenticationManager);
+        endpoints.tokenStore(tokenStore());
+//                .userDetailsService(userDetailsService)
+//                .authenticationManager(authenticationManager);
     }
 
     @Bean
