@@ -10,7 +10,7 @@ import org.springframework.security.oauth2.config.annotation.web.configurers.Res
 /**
  * 认证服务器的资源保护
  */
-@Order(6)
+@Order(1)
 @Configuration
 @EnableResourceServer
 public class ResourceServerConfig extends ResourceServerConfigurerAdapter {
@@ -32,6 +32,7 @@ public class ResourceServerConfig extends ResourceServerConfigurerAdapter {
         http
                 .requestMatchers().antMatchers("/user/**")
                 .and()
+                .antMatcher("/ping")
                 .authorizeRequests()
                 .anyRequest()
                 .authenticated();

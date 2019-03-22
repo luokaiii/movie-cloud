@@ -2,6 +2,10 @@ package cn.luokaiii.user.controller;
 
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.oauth2.common.DefaultOAuth2AccessToken;
 import org.springframework.security.oauth2.provider.token.TokenStore;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -16,6 +20,7 @@ public class AuthorizationController {
 
     private final TokenStore tokenStore;
 
+
     @Autowired
     public AuthorizationController(TokenStore tokenStore) {
         this.tokenStore = tokenStore;
@@ -23,8 +28,10 @@ public class AuthorizationController {
 
     @GetMapping("/ping")
     @ApiOperation(value = "获取当前登录的用户信息", tags = "授权接口")
-    public Principal user(Principal user) {
-        return user;
+    public ResponseEntity<Principal> user(Principal user) {
+        HttpHeaders httpHeaders = new HttpHeaders();
+        httpHeaders.setContentType(MediaType.APPLICATION_JSON);
+        return new ResponseEntity<>(user, httpHeaders, HttpStatus.OK);
     }
 
     @RequestMapping("/oauth/remove_token")

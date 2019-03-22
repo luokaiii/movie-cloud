@@ -11,6 +11,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.oauth2.config.annotation.configurers.ClientDetailsServiceConfigurer;
 import org.springframework.security.oauth2.config.annotation.web.configuration.AuthorizationServerConfigurerAdapter;
 import org.springframework.security.oauth2.config.annotation.web.configuration.EnableAuthorizationServer;
+import org.springframework.security.oauth2.config.annotation.web.configuration.EnableOAuth2Client;
 import org.springframework.security.oauth2.config.annotation.web.configurers.AuthorizationServerEndpointsConfigurer;
 import org.springframework.security.oauth2.config.annotation.web.configurers.AuthorizationServerSecurityConfigurer;
 import org.springframework.security.oauth2.provider.token.TokenStore;
@@ -21,6 +22,7 @@ import org.springframework.security.oauth2.provider.token.store.redis.RedisToken
  */
 @Slf4j
 @Configuration
+@EnableOAuth2Client
 @EnableAuthorizationServer
 public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdapter {
 
@@ -68,6 +70,7 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
      */
     @Override
     public void configure(ClientDetailsServiceConfigurer clients) throws Exception {
+        // todo 使用DB存储客户端的配置，或者通过配置文件存储
         clients.inMemory()
                 // Movie-Service
                 .withClient("movie-service")
@@ -89,6 +92,13 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
                 .withClient("user-service")
                 .secret(passwordEncoder.encode("user-service"))
                 .authorizedGrantTypes("authorization_code", "refresh_token")
+                .scopes("all")
+                .and()
+                // Record-Service
+                .withClient("record-service")
+                .secret(passwordEncoder.encode("record-service"))
+                .authorizedGrantTypes("authorization_code", "refresh_token")
+                .redirectUris("http://localhost:9005/login/oauth2/code/callback", "http://localhost:9005/login")
                 .scopes("all")
         ;
     }
