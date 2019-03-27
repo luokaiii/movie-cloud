@@ -10,6 +10,7 @@ import org.springframework.web.servlet.ModelAndView;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Map;
 
 @Controller
@@ -60,6 +61,7 @@ public class MvcController {
                 .getPrincipal())
                 .getUsername();
         model.put("userName", userName);
+        model.put("client", new ArrayList<>());
         return new ModelAndView("index", model);
     }
 }
