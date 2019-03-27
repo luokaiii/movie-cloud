@@ -1,0 +1,40 @@
+spring:
+  application:
+    name: api-gateway
+  profiles:
+    active: dev
+  cloud:
+    consul:
+      host: localhost
+      port: 8500
+      discovery:
+        prefer-ip-address: true
+
+server:
+  port: 18000
+
+zuul:
+  routes:
+    user-data:
+      path: /api/user-data/**
+      serviceId: user-data
+
+proxy:
+  auth:
+    routes:
+      user-data: oauth2
+
+security:
+  #  ignored: |
+  #    /css/**,/js/**,/favicon.ico,/webjars/**,/images/**,
+  #    /hystrix.stream/**,/info,/error,/health,/env,/metrics,/trace,/dump,
+  #    /jolokia,/configprops,/activiti,/logfile,/refresh,/flyway,/liquibase,/loggers
+  oauth2:
+    resource:
+      jwt:
+        key-uri: http://${AUTH_CENTER_HOST:localhost}:${AUTH_CENTER_PORT:18001}/oauth/token_key
+      id: ${spring.application.name}
+      serviceId: ${spring.application.name}
+
+logging:
+  file: logs/api-gateway.log

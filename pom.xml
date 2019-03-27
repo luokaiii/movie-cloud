@@ -11,11 +11,10 @@
     
     <modules>
         <module>user-service</module>
-        <module>movie-service</module>
-        <module>comment-service</module>
-        <module>record-service</module>
         <module>common-service</module>
         <module>user-data-service</module>
+        <module>auth-center-service</module>
+        <module>api-gateway</module>
     </modules>
 
     <properties>

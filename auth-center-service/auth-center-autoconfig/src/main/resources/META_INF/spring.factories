@@ -1,0 +1,5 @@
+org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
+cn.luokaiii.auth.autoconfig.AuthResourcesAutoConfiguration,\
+cn.luokaiii.auth.autoconfig.config.WebSecurityConfig,\
+cn.luokaiii.auth.autoconfig.utils.AccessTokenUtils,\
+cn.luokaiii.auth.autoconfig.config.RedisAuthConfiguration

@@ -4,6 +4,7 @@ import cn.luokaiii.common.model.BaseEntity;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.io.Serializable;
+import java.util.List;
 
 @Document(collection = "base_user")
 public class BaseUser extends BaseEntity implements Serializable {
@@ -19,6 +20,16 @@ public class BaseUser extends BaseEntity implements Serializable {
     private Integer age;
 
     private Integer active;
+
+    private List<String> roles;
+
+    public List<String> getRoles() {
+        return roles;
+    }
+
+    public void setRoles(List<String> roles) {
+        this.roles = roles;
+    }
 
     public String getUsername() {
         return username;

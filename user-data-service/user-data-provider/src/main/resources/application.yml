@@ -1,6 +1,9 @@
 server:
   port: 18002
 spring:
+  # 服务名称
+  application:
+    name: user-data
   # MongoDB 配置
   data:
     mongodb:
@@ -11,27 +14,26 @@ spring:
     port: ${REDIS_PORT:6379}
     database: ${REDIS_DATABASE:0}
   # RabbitMQ 配置
-  rabbitmq:
-    host: localhost
-    port: 5672
-    username: guest
-    password: guest
-  # 服务名称
-  application:
-    name: user-data
+  #  rabbitmq:
+  #    host: localhost
+  #    port: 5672
+  #    username: guest
+  #    password: guest
   # Consul服务注册中心
   cloud:
     consul:
-      host: localhost
-      port: 8500
+      host: ${CONSUL_HOST:localhost}
+      port: ${CONSUL_PORT:8500}
       discovery:
         prefer-ip-address: true
+        service-name: user-data
+        health-check-timeout: 15s
 # 权限配置
 security:
   oauth2:
     resource:
       jwt:
-        key-uri: http://${AUTH_CENTER_HOST:localhost}:${AUTH_CENTER_PORT:18001}/auth/oauth/token_key
+        key-uri: http://${AUTH_CENTER_HOST:localhost}:${AUTH_CENTER_PORT:18001}/oauth/token_key
       id: ${spring.application.name}
       serviceId: ${spring.application.name}
 # 日志配置
