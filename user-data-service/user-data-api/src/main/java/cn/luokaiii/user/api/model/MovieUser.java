@@ -1,13 +1,17 @@
 package cn.luokaiii.user.api.model;
 
 import cn.luokaiii.common.model.BaseEntity;
+import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.io.Serializable;
 import java.util.List;
 
+/**
+ * 用户实体
+ */
 @Document(collection = "base_user")
-public class BaseUser extends BaseEntity implements Serializable {
+public class MovieUser extends BaseEntity implements Serializable {
 
     private String username;
 
@@ -22,6 +26,12 @@ public class BaseUser extends BaseEntity implements Serializable {
     private Integer active;
 
     private List<String> roles;
+
+    @Id
+    @Override
+    public String getId() {
+        return super.getId();
+    }
 
     public List<String> getRoles() {
         return roles;

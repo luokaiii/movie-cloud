@@ -1,7 +1,7 @@
 package cn.luokaiii.auth.autoconfig.utils;
 
 import cn.luokaiii.auth.api.pojo.Constant;
-import cn.luokaiii.user.api.model.BaseUser;
+import cn.luokaiii.user.api.model.MovieUser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.AccessDeniedException;
 import org.springframework.security.core.Authentication;
@@ -25,8 +25,8 @@ public class AccessTokenUtils {
     /**
      * 从token获取用户信息
      */
-    public BaseUser getUserInfo() {
-        return (BaseUser) getAccessToken().getAdditionalInformation().get(Constant.USER_INFO);
+    public MovieUser getUserInfo() {
+        return (MovieUser) getAccessToken().getAdditionalInformation().get(Constant.USER_INFO);
     }
 
     private OAuth2AccessToken getAccessToken() throws AccessDeniedException {

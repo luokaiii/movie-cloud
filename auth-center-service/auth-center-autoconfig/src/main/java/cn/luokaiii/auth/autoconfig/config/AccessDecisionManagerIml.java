@@ -50,18 +50,6 @@ public class AccessDecisionManagerIml implements AccessDecisionManager {
             }
         }
 
-        return;
-
-        // URL 鉴权
-//        Iterator<BaseRole> iterator = accessTokenUtils.getRoleInfo().iterator();
-//        while (iterator.hasNext())
-//        {   BaseRole baseRole = iterator.next();
-//            if (baseRole.getModules().size() > 0 && checkSubModule(baseRole.getModules())) {
-//                return;
-//            }
-//        }
-
-//        throw new AccessDeniedException("无权限！");
     }
 
     @Override

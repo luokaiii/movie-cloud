@@ -1,6 +1,6 @@
 package cn.luokaiii.auth.api.config;
 
-import cn.luokaiii.user.api.model.BaseUser;
+import cn.luokaiii.user.api.model.MovieUser;
 import org.springframework.security.core.CredentialsContainer;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.User;
@@ -10,11 +10,11 @@ import java.util.Collection;
 
 public class BaseUserDetail implements UserDetails, CredentialsContainer {
 
-    private final BaseUser baseUser;
+    private final MovieUser movieUser;
     private final User user;
 
-    public BaseUserDetail(BaseUser baseUser, User user) {
-        this.baseUser = baseUser;
+    public BaseUserDetail(MovieUser movieUser, User user) {
+        this.movieUser = movieUser;
         this.user = user;
     }
 
@@ -58,7 +58,7 @@ public class BaseUserDetail implements UserDetails, CredentialsContainer {
         return user.isEnabled();
     }
 
-    public BaseUser getBaseUser() {
-        return baseUser;
+    public MovieUser getMovieUser() {
+        return movieUser;
     }
 }

@@ -3,7 +3,7 @@ package cn.luokaiii.auth.api.token;
 import cn.luokaiii.auth.api.config.BaseUserDetail;
 import cn.luokaiii.auth.api.pojo.Constant;
 import cn.luokaiii.common.utils.JsonUtils;
-import cn.luokaiii.user.api.model.BaseUser;
+import cn.luokaiii.user.api.model.MovieUser;
 import org.springframework.security.oauth2.common.DefaultOAuth2AccessToken;
 import org.springframework.security.oauth2.common.OAuth2AccessToken;
 import org.springframework.security.oauth2.provider.OAuth2Authentication;
@@ -23,10 +23,10 @@ public class JwtAccessToken extends JwtAccessTokenConverter {
         DefaultOAuth2AccessToken defaultOAuth2AccessToken = new DefaultOAuth2AccessToken(accessToken);
 
         // 设置额外用户信息
-        BaseUser baseUser = ((BaseUserDetail) authentication.getPrincipal()).getBaseUser();
-        baseUser.setPassword(null);
+        MovieUser movieUser = ((BaseUserDetail) authentication.getPrincipal()).getMovieUser();
+        movieUser.setPassword(null);
         // 将用户信息添加到token额外信息中
-        defaultOAuth2AccessToken.getAdditionalInformation().put(Constant.USER_INFO, baseUser);
+        defaultOAuth2AccessToken.getAdditionalInformation().put(Constant.USER_INFO, movieUser);
 
         return super.enhance(defaultOAuth2AccessToken, authentication);
     }
@@ -46,9 +46,9 @@ public class JwtAccessToken extends JwtAccessTokenConverter {
 
     }
 
-    private BaseUser convertUserData(Object map) {
+    private MovieUser convertUserData(Object map) {
         String json = JsonUtils.deserializer(map);
-        return JsonUtils.serializable(json, BaseUser.class);
+        return JsonUtils.serializable(json, MovieUser.class);
     }
 
 }

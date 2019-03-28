@@ -1,4 +1,4 @@
-package cn.luokaiii.user.api.model;
+package cn.luokaiii.user.api;
 
 public enum ResponseCode {
 
