@@ -948,3 +948,10 @@ Using generated security password: d8392592-9c21-40a0-8500-63061df2c844
 2019-03-27 17:55:24.884  INFO 20372 --- [RMI TCP Connection(4)-127.0.0.1] o.s.web.servlet.DispatcherServlet        : FrameworkServlet 'dispatcherServlet': initialization completed in 38 ms
 2019-03-27 17:55:25.089  INFO 20372 --- [RMI TCP Connection(5)-127.0.0.1] io.lettuce.core.EpollProvider            : Starting without optional epoll library
 2019-03-27 17:55:25.091  INFO 20372 --- [RMI TCP Connection(5)-127.0.0.1] io.lettuce.core.KqueueProvider           : Starting without optional kqueue library
+2019-03-27 18:19:11.746  INFO 20372 --- [Thread-50] ConfigServletWebServerApplicationContext : Closing org.springframework.boot.web.servlet.context.AnnotationConfigServletWebServerApplicationContext@4ed68f: startup date [Wed Mar 27 17:55:08 CST 2019]; parent: org.springframework.context.annotation.AnnotationConfigApplicationContext@ce702d
+2019-03-27 18:19:11.754  INFO 20372 --- [Thread-50] o.s.c.support.DefaultLifecycleProcessor  : Stopping beans in phase 0
+2019-03-27 18:19:11.757  INFO 20372 --- [Thread-50] o.s.c.c.s.ConsulServiceRegistry          : Deregistering service with consul: user-data-18002
+2019-03-27 18:19:11.770  INFO 20372 --- [Thread-50] o.s.s.c.ThreadPoolTaskScheduler          : Shutting down ExecutorService 'catalogWatchTaskScheduler'
+2019-03-27 18:19:11.774  INFO 20372 --- [Thread-50] o.s.j.e.a.AnnotationMBeanExporter        : Unregistering JMX-exposed beans on shutdown
+2019-03-27 18:19:11.776  INFO 20372 --- [Thread-50] o.s.j.e.a.AnnotationMBeanExporter        : Unregistering JMX-exposed beans
+2019-03-27 18:19:12.929  INFO 20372 --- [Thread-50] org.mongodb.driver.connection            : Closed connection [connectionId{localValue:2, serverValue:388}] to localhost:27017 because the pool has been closed.
