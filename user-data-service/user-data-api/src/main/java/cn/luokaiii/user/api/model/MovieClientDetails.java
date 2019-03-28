@@ -5,6 +5,7 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.io.Serializable;
+import java.util.Collection;
 import java.util.Map;
 import java.util.Set;
 
@@ -29,9 +30,9 @@ public class MovieClientDetails extends BaseEntity implements Serializable {
 
     private Set<String> authorizedGrantTypes; // 客户端授权方式
 
-    private String webServerRedirectUri; // 客户端回调地址
+    private Set<String> webServerRedirectUri; // 客户端回调地址
 
-    private Set<String> authorities;
+    private Collection<String> authorities;
 
     private Integer accessTokenValidity; // access_token的有效期
 
@@ -39,7 +40,7 @@ public class MovieClientDetails extends BaseEntity implements Serializable {
 
     private Map<String, Object> additionalInformation; // 附加信息
 
-    private String autoapprove;
+    private Boolean autoapprove;
 
     @Id
     @Override
@@ -95,20 +96,28 @@ public class MovieClientDetails extends BaseEntity implements Serializable {
         this.authorizedGrantTypes = authorizedGrantTypes;
     }
 
-    public String getWebServerRedirectUri() {
+    public Set<String> getWebServerRedirectUri() {
         return webServerRedirectUri;
     }
 
-    public void setWebServerRedirectUri(String webServerRedirectUri) {
+    public void setWebServerRedirectUri(Set<String> webServerRedirectUri) {
         this.webServerRedirectUri = webServerRedirectUri;
     }
 
-    public Set<String> getAuthorities() {
+    public Collection<String> getAuthorities() {
         return authorities;
     }
 
-    public void setAuthorities(Set<String> authorities) {
+    public void setAuthorities(Collection<String> authorities) {
         this.authorities = authorities;
+    }
+
+    public Boolean getAutoapprove() {
+        return autoapprove;
+    }
+
+    public void setAutoapprove(Boolean autoapprove) {
+        this.autoapprove = autoapprove;
     }
 
     public Integer getAccessTokenValidity() {
@@ -135,11 +144,5 @@ public class MovieClientDetails extends BaseEntity implements Serializable {
         this.additionalInformation = additionalInformation;
     }
 
-    public String getAutoapprove() {
-        return autoapprove;
-    }
 
-    public void setAutoapprove(String autoapprove) {
-        this.autoapprove = autoapprove;
-    }
 }
