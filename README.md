@@ -10,3 +10,7 @@
 ### framework 系统架构
 
 ![系统架构图](https://github.com/luokaiii/movie-cloud/blob/master/image/%E7%B3%BB%E7%BB%9F%E6%9E%B6%E6%9E%84%E5%9B%BE.jpg)
+
+### Authority 权限系统架构
+
+![权限架构](https://github.com/luokaiii/movie-cloud/blob/master/image/Movie-%E8%A7%92%E8%89%B2%E7%B3%BB%E7%BB%9F.jpg)

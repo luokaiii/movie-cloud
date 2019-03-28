@@ -15,7 +15,7 @@ public interface MovieRoleService extends MovieRoleRemoteService {
     class HystrixClientFallback implements MovieRoleService {
 
         @Override
-        public ResponseData<List<MovieRole>> getRoleByIds(String[] ids) {
+        public ResponseData<List<MovieRole>> getRoleByCodes(String[] codes) {
             return new ResponseData<>(ResponseCode.ERROR.getCode(), ResponseCode.ERROR.getMessage());
         }
     }

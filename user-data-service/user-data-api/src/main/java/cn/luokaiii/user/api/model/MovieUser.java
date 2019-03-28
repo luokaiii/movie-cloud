@@ -5,7 +5,6 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.io.Serializable;
-import java.util.List;
 
 /**
  * 用户实体
@@ -25,7 +24,7 @@ public class MovieUser extends BaseEntity implements Serializable {
 
     private Integer active;
 
-    private List<String> roles;
+    private String[] roles;
 
     @Id
     @Override
@@ -33,11 +32,11 @@ public class MovieUser extends BaseEntity implements Serializable {
         return super.getId();
     }
 
-    public List<String> getRoles() {
+    public String[] getRoles() {
         return roles;
     }
 
-    public void setRoles(List<String> roles) {
+    public void setRoles(String[] roles) {
         this.roles = roles;
     }
 

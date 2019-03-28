@@ -13,6 +13,7 @@ public interface MovieRoleRemoteService {
     /**
      * 根据权限ID查权限
      */
-    @RequestMapping(value = "/role", method = RequestMethod.GET)
-    ResponseData<List<MovieRole>> getRoleByIds(@RequestParam("id") String[] ids);
+    @RequestMapping(value = "/role/user/roleIds", method = RequestMethod.GET)
+    ResponseData<List<MovieRole>> getRoleByCodes(@RequestParam("codes") String[] codes);
+
 }

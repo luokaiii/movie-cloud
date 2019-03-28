@@ -19,4 +19,8 @@
     
 - 问题二：consul的安全检查未通过
     1. 原因一：/actuator/** 下的所有请求被 Security 拦截了，忽略即可
+    
+- 问题三：Provider中的接口，无法接收到参数
+    1. 原因一：不要使用List做参数接收
+    2. 原因二：Provider的接口上也需要加上 @PathVariable 或者 @RequestParam
 

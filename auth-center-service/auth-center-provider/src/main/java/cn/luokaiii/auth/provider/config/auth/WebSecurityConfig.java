@@ -6,6 +6,8 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.annotation.Order;
 import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
+import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
@@ -50,6 +52,23 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 "/refresh", "/flyway", "/liquibase",
                 "/loggers", "/druid/**",
                 "/oauth/deleteToken", "/backReferer");
+    }
+
+    @Override
+    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
+        auth.authenticationProvider(daoAuthenticationProvider());
+    }
+
+    @Bean
+    public DaoAuthenticationProvider daoAuthenticationProvider() {
+        DaoAuthenticationProvider provider = new DaoAuthenticationProvider();
+        // 设置 userDetailsService
+        provider.setUserDetailsService(usernameUserDetailService);
+        // 禁止隐藏用户未找到异常
+        provider.setHideUserNotFoundExceptions(false);
+        // 使用 BCrypt 进行密码的 hash
+        provider.setPasswordEncoder(myEncoder());
+        return provider;
     }
 
     @Bean

@@ -1,5 +1,10 @@
 package cn.luokaiii.auth.provider.config.web;
 
+import cn.luokaiii.common.model.ResponseData;
+import cn.luokaiii.user.api.ResponseCode;
+import cn.luokaiii.user.api.model.MovieClientDetails;
+import cn.luokaiii.user.client.MovieClientDetailsService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
@@ -11,11 +16,19 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 @Controller
 @SessionAttributes({"authorizationRequest"})
 public class MvcController {
+
+    private final MovieClientDetailsService movieClientDetailsService;
+
+    @Autowired
+    public MvcController(MovieClientDetailsService movieClientDetailsService) {
+        this.movieClientDetailsService = movieClientDetailsService;
+    }
 
     /**
      * 登出回调
@@ -61,7 +74,13 @@ public class MvcController {
                 .getPrincipal())
                 .getUsername();
         model.put("userName", userName);
-        model.put("client", new ArrayList<>());
+        // 获取全部客户端应用
+        ResponseData<List<MovieClientDetails>> allClient = movieClientDetailsService.getAllClient();
+        if (ResponseCode.SUCCESS.getCode().equals(allClient.getCode())) {
+            model.put("client", allClient.getData());
+        } else {
+            model.put("client", new ArrayList<>());
+        }
         return new ModelAndView("index", model);
     }
 }

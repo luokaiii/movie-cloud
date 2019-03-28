@@ -11,6 +11,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     public void configure(WebSecurity web) throws Exception {
+        // 过滤静态资源、Actuator的健康检查路径、登录查询等公开接口
         web.ignoring().antMatchers(
                 "/css/**", "/js/**", "/favicon.ico", "/webjars/**", "/images/**",
                 "/hystrix.stream/**", "/info", "/error", "/health", "/actuator", "/actuator/**", "/env", "/metrics", "/trace", "/dump",

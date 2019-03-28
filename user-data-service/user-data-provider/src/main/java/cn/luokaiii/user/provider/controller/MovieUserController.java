@@ -10,6 +10,10 @@ import cn.luokaiii.user.provider.service.MovieUserService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Example;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
@@ -39,6 +43,14 @@ public class MovieUserController implements MovieUserRemoteService {
         MovieUser movieUser = movieUserService.findByPhone(phone)
                 .orElseThrow(() -> new ResponseException("没有找到该用户"));
         return new ResponseData<>(ResponseCode.SUCCESS.getCode(), ResponseCode.SUCCESS.getMessage(), movieUser);
+    }
+
+    @GetMapping("/user/list")
+    public ResponseData<Page<MovieUser>> getByExample(MovieUser movieUser,
+                                                      @PageableDefault Pageable pageable) {
+        Example<MovieUser> example = Example.of(movieUser);
+        Page<MovieUser> users = movieUserService.getByPage(example, pageable);
+        return new ResponseData<>(ResponseCode.SUCCESS.getCode(), ResponseCode.SUCCESS.getMessage(), users);
     }
 
     @PostMapping("/user")

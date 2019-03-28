@@ -7,6 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.repository.MongoRepository;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class MovieRoleService extends AbstractService<MovieRole, String> {
 
@@ -20,5 +22,9 @@ public class MovieRoleService extends AbstractService<MovieRole, String> {
     @Override
     protected MongoRepository<MovieRole, String> getRepository() {
         return movieRoleRepository;
+    }
+
+    public List<MovieRole> findByCodeIn(String[] codes) {
+        return movieRoleRepository.findByRoleCodeIn(codes);
     }
 }

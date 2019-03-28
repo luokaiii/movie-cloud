@@ -8,6 +8,7 @@ import cn.luokaiii.user.api.service.ModuleResourcesRemoteService;
 import org.springframework.cloud.openfeign.FeignClient;
 
 import java.util.List;
+import java.util.Set;
 
 /**
  * 使用Feign，调用远程服务。
@@ -20,6 +21,11 @@ public interface ModuleResourcesService extends ModuleResourcesRemoteService {
 
         @Override
         public ResponseData<List<ModuleResources>> getMenusByRoles(String[] roles) {
+            return new ResponseData<>(ResponseCode.ERROR.getCode(), ResponseCode.ERROR.getMessage());
+        }
+
+        @Override
+        public ResponseData<List<ModuleResources>> getMenusByIds(Set<String> ids) {
             return new ResponseData<>(ResponseCode.ERROR.getCode(), ResponseCode.ERROR.getMessage());
         }
     }
