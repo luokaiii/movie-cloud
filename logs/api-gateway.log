@@ -1,8 +1,0 @@
-2019-03-27 16:30:46.277  INFO 22912 --- [Thread-50] ConfigServletWebServerApplicationContext : Closing org.springframework.boot.web.servlet.context.AnnotationConfigServletWebServerApplicationContext@a896b0: startup date [Wed Mar 27 16:25:13 CST 2019]; parent: org.springframework.context.annotation.AnnotationConfigApplicationContext@17c473a
-2019-03-27 16:30:46.286  INFO 22912 --- [Thread-50] o.s.c.support.DefaultLifecycleProcessor  : Stopping beans in phase 0
-2019-03-27 16:30:46.288  INFO 22912 --- [Thread-50] o.s.c.n.zuul.ZuulFilterInitializer       : Stopping filter initializer
-2019-03-27 16:30:46.291  INFO 22912 --- [Thread-50] o.s.c.c.s.ConsulServiceRegistry          : Deregistering service with consul: api-gateway-18000
-2019-03-27 16:30:46.307  INFO 22912 --- [Thread-50] o.s.s.c.ThreadPoolTaskScheduler          : Shutting down ExecutorService 'catalogWatchTaskScheduler'
-2019-03-27 16:30:46.310  INFO 22912 --- [Thread-50] o.s.j.e.a.AnnotationMBeanExporter        : Unregistering JMX-exposed beans on shutdown
-2019-03-27 16:30:46.311  INFO 22912 --- [Thread-50] o.s.j.e.a.AnnotationMBeanExporter        : Unregistering JMX-exposed beans
-2019-03-27 16:30:46.339  INFO 22912 --- [Thread-50] org.mongodb.driver.connection            : Closed connection [connectionId{localValue:2, serverValue:355}] to localhost:27017 because the pool has been closed.
