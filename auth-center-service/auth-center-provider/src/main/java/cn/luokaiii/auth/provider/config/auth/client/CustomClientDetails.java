@@ -52,7 +52,8 @@ public class CustomClientDetails implements ClientDetails {
 
     @Override
     public Set<String> getRegisteredRedirectUri() {
-        return clientDetails.getWebServerRedirectUri();
+        return clientDetails.getWebServerRedirectUri() == null ?
+                null : Collections.singleton(clientDetails.getWebServerRedirectUri());
     }
 
     @Override

@@ -30,7 +30,7 @@ public class MovieClientDetails extends BaseEntity implements Serializable {
 
     private Set<String> authorizedGrantTypes; // 客户端授权方式
 
-    private Set<String> webServerRedirectUri; // 客户端回调地址
+    private String webServerRedirectUri; // 客户端回调地址
 
     private Collection<String> authorities;
 
@@ -96,11 +96,11 @@ public class MovieClientDetails extends BaseEntity implements Serializable {
         this.authorizedGrantTypes = authorizedGrantTypes;
     }
 
-    public Set<String> getWebServerRedirectUri() {
+    public String getWebServerRedirectUri() {
         return webServerRedirectUri;
     }
 
-    public void setWebServerRedirectUri(Set<String> webServerRedirectUri) {
+    public void setWebServerRedirectUri(String webServerRedirectUri) {
         this.webServerRedirectUri = webServerRedirectUri;
     }
 
