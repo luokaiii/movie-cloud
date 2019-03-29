@@ -5,3 +5,7 @@
 /target/*
 /logs
 *.log
+*.project
+*.classpath
+*.prefs
+*.factorypath
