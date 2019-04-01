@@ -14,3 +14,6 @@
 ### Authority 权限系统架构
 
 ![权限架构](https://github.com/luokaiii/movie-cloud/blob/master/image/Movie-%E8%A7%92%E8%89%B2%E7%B3%BB%E7%BB%9F.jpg)
+
+[![LICENSE](https://img.shields.io/badge/license-NPL%20(The%20996%20Prohibited%20License)-blue.svg)](https://github.com/996icu/996.ICU/blob/master/LICENSE)
+
